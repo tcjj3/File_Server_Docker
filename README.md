@@ -29,8 +29,8 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  -p 138:138/udp \
  -p 139:139 \
  -p 445:445 \
- -v xrit-rx:/usr/local/bin/file_manager/xrit-rx \
- -v himawari-rx:/usr/local/bin/file_manager/himawari-rx \
+ -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
+ -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
  tcjj3/file_server_docker:latest
 ```
 
