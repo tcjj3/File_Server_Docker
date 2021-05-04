@@ -42,16 +42,16 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && cp /usr/etc/bftpd.conf /etc/bftpd.conf \
   && cd .. \
   && rm -rf bftpd \
-  && curl https://download.samba.org/pub/samba/stable/samba-3.0.14a.tar.gz -o samba-3.0.14a.tar.gz || echo "continue..." \
-  && tar zxf samba-3.0.14a.tar.gz || echo "continue..." \
-  && cd samba-3.0.14a/source || echo "continue..." \
-  && chmod +x configure || echo "continue..." \
+  && curl https://download.samba.org/pub/samba/stable/samba-3.0.14a.tar.gz -o samba-3.0.14a.tar.gz \
+  && tar zxf samba-3.0.14a.tar.gz \
+  && cd samba-3.0.14a/source \
+  && chmod +x configure \
   && ./configure || echo "continue..." \
-  && (make || (sed -Ei "s/D.dqb_curblocks/D.dqb_curspace/g" lib/sysquotas_4A.c && make)) || echo "continue..." \
-  && make install || echo "continue..." \
-  && cd ../.. || echo "continue..." \
-  && rm -rf samba-3.0.14a || echo "continue..." \
-  && rm -rf samba-3.0.14a.tar.gz || echo "continue..." \
+  && make || (sed -Ei "s/D.dqb_curblocks/D.dqb_curspace/g" lib/sysquotas_4A.c && make) \
+  && make install \
+  && cd ../.. \
+  && rm -rf samba-3.0.14a \
+  && rm -rf samba-3.0.14a.tar.gz \
   && rm -rf ${DIR_TMP} \
   && apt-get autoremove --purge ca-certificates git pkg-config build-essential cmake make unzip -y
 
