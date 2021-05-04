@@ -77,9 +77,6 @@ EOF
 
 
 
-FTP_PORT=""
-FTP_PASSIVE_PORT=""
-
 if [ -z "$FTP_PORT" ]; then
 	FTP_PORT="21"
 fi
