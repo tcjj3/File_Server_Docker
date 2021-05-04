@@ -35,7 +35,7 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && git clone https://github.com/gamman/bftpd \
   && cd bftpd \
   && chmod +x configure \
-  && ./configure --enable-pax=pax-sourcedir --enable-libz \
+  && ./configure --enable-pax=pax-sourcedir --enable-libz || echo "continue..." \
   && chmod +x mksources \
   && make \
   && make install \
