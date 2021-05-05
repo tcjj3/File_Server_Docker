@@ -33,6 +33,20 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 <br>
 **Like this: **
 
+```
+[tcjj3@debian]$ sudo docker volume create xrit-rx
+[tcjj3@debian]$ sudo docker volume create himawari-rx
+[tcjj3@debian]$ sudo docker run -d -i -t \
+ --restart always \
+ --name=File_Server \
+ --net=host \
+ -e FTP_PORT="21" \
+ -e FTP_PASSIVE_PORTS="0" \
+ -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
+ -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
+ tcjj3/file_server_docker:latest
+```
+
 **Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
 **"`137-138/udp`" ports are for "`nmbd`", "`139`" and "`445`" ports are for "`smbd`", these ports would be used by default, so please make sure these ports on your host are not binded by other programs.**
