@@ -50,6 +50,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 
 **Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
+
 **"`137-138/udp`" ports are for "`nmbd`", "`139`" and "`445`" ports are for "`smbd`", these ports would be used by default, so please make sure these ports on your host are not binded by other programs.**
 
 
