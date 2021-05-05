@@ -22,9 +22,9 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  --restart always \
  --name=File_Server \
  -e FTP_PORT="21" \
- -e FTP_PASSIVE_PORTS="27" \
+ -e FTP_PASSIVE_PORTS="2500" \
  -p 21:21 \
- -p 27:27 \
+ -p 2500:2500 \
  -p 137-138:137-138/udp \
  -p 139:139 \
  -p 445:445 \
@@ -33,7 +33,9 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  tcjj3/file_server_docker:latest
 ```
 
-**In this part, "`21`" is the `FTP` port, and "`27`" is the `FTP Passiv` port. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
+**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passiv` port. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
+<br>
+**Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
 **"`137-138/udp`" ports are for "`nmbd`", "`139`" and "`445`" ports are for "`smbd`", these ports would be used by default, so please make sure these ports on your host are not binded by other programs.**
 
