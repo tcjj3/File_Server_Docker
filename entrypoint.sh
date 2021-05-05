@@ -82,7 +82,7 @@ if [ -z "$FTP_PORT" ]; then
 fi
 
 if [ -z "$FTP_PASSIVE_PORTS" ]; then
-	FTP_PASSIVE_PORTS="27"
+	FTP_PASSIVE_PORTS="2500"
 fi
 
 
