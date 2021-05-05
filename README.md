@@ -29,7 +29,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  tcjj3/file_server_docker:latest
 ```
 
-**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passiv port` (If you want to bind any free port, just set it to `0`). If you want to change these ports, just modify the numbers in "`-e`" argument.**
+**In this part, "`21`" is the `FTP port`, and "`2500`" is the `FTP Passiv port` (If you want to bind any free port, just set it to `0`). If you want to change these ports, just modify the numbers in "`-e`" arguments.**
 <br>
 
 **Like this (set the `FTP Passiv port` to `0` for binding any free port):**
