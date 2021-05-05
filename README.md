@@ -25,8 +25,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  -e FTP_PASSIVE_PORTS="27" \
  -p 21:21 \
  -p 27:27 \
- -p 137:137/udp \
- -p 138:138/udp \
+ -p 137-138:137-138/udp \
  -p 139:139 \
  -p 445:445 \
  -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
