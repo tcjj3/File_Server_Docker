@@ -21,19 +21,15 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 [tcjj3@debian]$ sudo docker run -d -i -t \
  --restart always \
  --name=File_Server \
+ --net=host \
  -e FTP_PORT="21" \
  -e FTP_PASSIVE_PORTS="2500" \
- -p 21:21 \
- -p 2500:2500 \
- -p 137-138:137-138/udp \
- -p 139:139 \
- -p 445:445 \
  -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
  -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
  tcjj3/file_server_docker:latest
 ```
 
-**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passiv` port. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
+**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passiv` port. If you want to change these ports, just modify the numbers in "`-e`" argument.**
 <br>
 **Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
