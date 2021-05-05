@@ -18,6 +18,7 @@ RUN export DIR_TMP="$(mktemp -d)" \
                                                 cron \
                                                 vim \
                                                 net-tools \
+                                                iproute2 \
                                                 ca-certificates \
                                                 git \
                                                 pkg-config \
@@ -32,11 +33,15 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && mkdir -p /usr/local/bin/file_server \
   && mkdir -p /usr/local/bin/file_server/xrit-rx \
   && mkdir -p /usr/local/bin/file_server/himawari-rx \
+  && mkdir -p /var/run/vsftpd/empty \
+  && chmod -w /var/run/vsftpd/empty \
   && git clone https://github.com/gamman/bftpd \
   && cd bftpd \
   && chmod +x configure \
   && ./configure --enable-pax=pax-sourcedir --enable-libz || echo "continue..." \
   && chmod +x mksources \
+  && sed -Ei "s/command_pasv, STATE_AUTHENTICATED, 0\}/command_pasv, STATE_AUTHENTICATED, 1}/gi" commands.c || echo "continue..." \
+  && sed -Ei "s/command_eprt, STATE_AUTHENTICATED, 1\}/command_eprt, STATE_AUTHENTICATED, 0}/gi" commands.c || echo "continue..." \
   && make \
   && make install \
   && cp /usr/etc/bftpd.conf /etc/bftpd.conf \
