@@ -33,7 +33,6 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 <br>
 
 **Like this (set the `FTP Passiv port` to `0` for binding any free port):**
-
 ```
 [tcjj3@debian]$ sudo docker volume create xrit-rx
 [tcjj3@debian]$ sudo docker volume create himawari-rx
@@ -43,6 +42,29 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  --net=host \
  -e FTP_PORT="21" \
  -e FTP_PASSIVE_PORTS="0" \
+ -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
+ -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
+ tcjj3/file_server_docker:latest
+```
+
+**If you want to use bridge network mode for this container, just remove the "`--net=host`" argument, then add "`FTP_OVERRIDE_IP`" environment variable and add `port forward` arguments using "`-e`" argument.**
+<br>
+**Like this (in this case, I've write some codes to get the host IP automatic for "`FTP_OVERRIDE_IP`", and please make sure "`FTP_PASSIVE_PORTS`" is not `0`, because it's not convenience to forward the ports which is using in `FTP Passive mode`):**
+```
+[tcjj3@debian]$ sudo docker volume create xrit-rx
+[tcjj3@debian]$ sudo docker volume create himawari-rx
+[tcjj3@debian]$ sudo docker run -d -i -t \
+ --restart always \
+ --name=File_Server \
+ -e FTP_OVERRIDE_IP="$(local_ip=$(ip route get 8.8.8.8 oif $(cat /proc/net/route | awk '{print $1}' | head -n 2 | tail -n 1)) && ([ -z "$(echo $local_ip | grep 'via')" ] && echo $(echo $local_ip | awk '{print $5}' | head -n 1)) || echo $(echo $local_ip | awk '{print $7}' | head -n 1))" \
+ -e FTP_PORT="21" \
+ -e FTP_PASSIVE_PORTS="2500" \
+ -p 21:21 \
+ -p 2500:2500 \
+ -p 137:137/udp \
+ -p 138:138/udp \
+ -p 139:139 \
+ -p 445:445 \
  -v xrit-rx:/usr/local/bin/file_server/xrit-rx \
  -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
  tcjj3/file_server_docker:latest
