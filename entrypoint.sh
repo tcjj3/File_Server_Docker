@@ -85,12 +85,19 @@ if [ -z "$FTP_PASSIVE_PORTS" ]; then
 	FTP_PASSIVE_PORTS="2500"
 fi
 
+if [ -z "$FTP_OVERRIDE_IP" ]; then
+	OVERRIDE_IP_STRING="#OVERRIDE_IP=\"0.0.0.0\""
+else
+	OVERRIDE_IP_STRING="OVERRIDE_IP=\"$FTP_OVERRIDE_IP\""
+fi
+
 
 cat << EOF > /etc/bftpd_server.conf
 global {
   DENY_LOGIN="no"
   PORT="$FTP_PORT"
   PASSIVE_PORTS="$FTP_PASSIVE_PORTS"
+  $OVERRIDE_IP_STRING
   DATAPORT20="no"
   ADMIN_PASS="x"
   #PATH_BFTPDUTMP="/var/run/bftpd/bftpdutmp"
