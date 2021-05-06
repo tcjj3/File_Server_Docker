@@ -56,7 +56,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 [tcjj3@debian]$ sudo docker run -d -i -t \
  --restart always \
  --name=File_Server \
- -e FTP_OVERRIDE_IP="$(local_ip=$(ip route get 8.8.8.8 oif $(cat /proc/net/route | awk '{print $1}' | head -n 2 | tail -n 1)) && ([ -z "$(echo $local_ip | grep 'via' | head -n 1)" ] && echo $(echo $local_ip | awk '{print $5}')) || echo $(echo $local_ip | awk '{print $7}'))" \
+ -e FTP_OVERRIDE_IP="$(local_ip=$(ip route get 8.8.8.8 oif $(cat /proc/net/route | awk '{print $1}' | head -n 2 | tail -n 1) | head -n 1) && ([ -z "$(echo $local_ip | grep 'via')" ] && echo $(echo $local_ip | awk '{print $5}')) || echo $(echo $local_ip | awk '{print $7}'))" \
  -e FTP_PORT="21" \
  -e FTP_PASSIVE_PORTS="2500" \
  -p 21:21 \
