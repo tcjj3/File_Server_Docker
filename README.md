@@ -47,9 +47,9 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  tcjj3/file_server_docker:latest
 ```
 
-**If you want to use bridge network mode for this container, just remove the "`--net=host`" argument, then add "`FTP_OVERRIDE_IP (FTP Passive IP)`" environment variable and add `port forward` arguments using "`-e`" argument.**
+**If you want to use bridge network mode for this container, just remove the "`--net=host`" argument, then add "`FTP_OVERRIDE_IP`"(`FTP Passive IP`) environment variable and add `port forward` arguments using "`-e`" argument.**
 <br>
-**Like this (in this case, I had wrote some codes to get the `host IP` automatic for "`FTP_OVERRIDE_IP (FTP Passive IP)`", and please make sure "`FTP_PASSIVE_PORTS`" is not `0`, because it's not convenience to forward the ports which is using in `FTP Passive mode`):**
+**Like this (in this case, I had wrote some codes to get the `host IP` automatic for "`FTP_OVERRIDE_IP`"(`FTP Passive IP`), and please make sure "`FTP_PASSIVE_PORTS`" is not `0`, because it's not convenience to forward the ports which is using in `FTP Passive mode`):**
 ```
 [tcjj3@debian]$ sudo docker volume create xrit-rx
 [tcjj3@debian]$ sudo docker volume create himawari-rx
