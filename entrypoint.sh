@@ -53,7 +53,17 @@ cat << EOF > /etc/samba/smb_server.conf
 	log level = 0
 	disable spoolss = yes
 	host msdfs = no
+	
+	
+	# Allow users who've been granted usershare privileges to create
+	# public shares, not just authenticated ones
+	usershare allow guests = yes
+	
+	# Supported for symlinks
+	follow symlinks = yes
+	wide links = yes
 	unix extensions = no
+
 
 	admin users = nobody
 
@@ -61,6 +71,8 @@ cat << EOF > /etc/samba/smb_server.conf
 [Server]
 	path = /usr/local/bin/file_server
 	read only = no
+	browseable = yes
+	writeable = yes
 	guest ok = yes
 	create mask = 0777
 	directory mask = 0777
