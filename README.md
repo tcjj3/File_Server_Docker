@@ -72,7 +72,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 **In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passive port`. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
 <br>
 
-**Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
+**Notice: The `FTP Passive ports` are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
 <br>
 
