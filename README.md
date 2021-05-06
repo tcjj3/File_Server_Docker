@@ -29,7 +29,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  tcjj3/file_server_docker:latest
 ```
 
-**In this part, "`21`" is the `FTP port`, and "`2500`" is the `FTP Passiv port` (If you want to bind any free port, just set it to `0`). If you want to change these ports, just modify the numbers in "`-e`" arguments.**
+**In this part, "`21`" is the `FTP port`, and "`2500`" is the `FTP Passive port` (If you want to bind any free port, just set it to `0`). If you want to change these ports, just modify the numbers in "`-e`" arguments.**
 <br>
 
 **Like this (set the `FTP Passiv port` to `0` for binding any free port):**
@@ -47,16 +47,16 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  tcjj3/file_server_docker:latest
 ```
 
-**If you want to use bridge network mode for this container, just remove the "`--net=host`" argument, then add "`FTP_OVERRIDE_IP`" environment variable and add `port forward` arguments using "`-e`" argument.**
+**If you want to use bridge network mode for this container, just remove the "`--net=host`" argument, then add "`FTP_OVERRIDE_IP (FTP Passive IP)`" environment variable and add `port forward` arguments using "`-e`" argument.**
 <br>
-**Like this (in this case, I've write some codes to get the host IP automatic for "`FTP_OVERRIDE_IP`", and please make sure "`FTP_PASSIVE_PORTS`" is not `0`, because it's not convenience to forward the ports which is using in `FTP Passive mode`):**
+**Like this (in this case, I had wrote some codes to get the `host IP` automatic for "`FTP_OVERRIDE_IP (FTP Passive IP)`", and please make sure "`FTP_PASSIVE_PORTS`" is not `0`, because it's not convenience to forward the ports which is using in `FTP Passive mode`):**
 ```
 [tcjj3@debian]$ sudo docker volume create xrit-rx
 [tcjj3@debian]$ sudo docker volume create himawari-rx
 [tcjj3@debian]$ sudo docker run -d -i -t \
  --restart always \
  --name=File_Server \
- -e FTP_OVERRIDE_IP="$(local_ip=$(ip route get 8.8.8.8 oif $(cat /proc/net/route | awk '{print $1}' | head -n 2 | tail -n 1)) && ([ -z "$(echo $local_ip | grep 'via')" ] && echo $(echo $local_ip | awk '{print $5}' | head -n 1)) || echo $(echo $local_ip | awk '{print $7}' | head -n 1))" \
+ -e FTP_OVERRIDE_IP="$(local_ip=$(ip route get 8.8.8.8 oif $(cat /proc/net/route | awk '{print $1}' | head -n 2 | tail -n 1)) && ([ -z "$(echo $local_ip | grep 'via' | head -n 1)" ] && echo $(echo $local_ip | awk '{print $5}')) || echo $(echo $local_ip | awk '{print $7}'))" \
  -e FTP_PORT="21" \
  -e FTP_PASSIVE_PORTS="2500" \
  -p 21:21 \
