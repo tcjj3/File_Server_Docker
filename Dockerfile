@@ -33,6 +33,8 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && mkdir -p /usr/local/bin/file_server \
   && mkdir -p /usr/local/bin/file_server/xrit-rx \
   && mkdir -p /usr/local/bin/file_server/himawari-rx \
+  && mkdir -p /var/run \
+  && mkdir -p /var/run/vsftpd \
   && mkdir -p /var/run/vsftpd/empty \
   && chmod -w /var/run/vsftpd/empty \
   && git clone https://github.com/gamman/bftpd \
