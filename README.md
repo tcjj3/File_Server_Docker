@@ -32,7 +32,7 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
 **In this part, "`21`" is the `FTP port`, and "`2500`" is the `FTP Passive port` (If you want to bind any free port, just set it to `0`). If you want to change these ports, just modify the numbers in "`-e`" arguments.**
 <br>
 
-**Like this (set the `FTP Passiv port` to `0` for binding any free port):**
+**Like this (set the `FTP Passive port` to `0` for binding any free port):**
 ```
 [tcjj3@debian]$ sudo docker volume create xrit-rx
 [tcjj3@debian]$ sudo docker volume create himawari-rx
@@ -69,13 +69,17 @@ File Server Docker for GK2A-Docker and Himawari-8_Docker.
  -v himawari-rx:/usr/local/bin/file_server/himawari-rx \
  tcjj3/file_server_docker:latest
 ```
-**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passiv port`. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
+**In this part, "`21`" is the `FTP` port, and "`2500`" is the `FTP Passive port`. If you want to change these ports, just modify the numbers both in "`-e`" and "`-p`" arguments.**
 <br>
 
 **Notice: These FTP port numbers are recommended to be set in the range of `1025-65534`, or it probably not working on some machines.**
 <br>
+<br>
 
 **"`137-138/udp`" ports are for "`nmbd`", "`139`" and "`445`" ports are for "`smbd`", these ports would be used by default, so please make sure these ports on your host are not binded by other programs.**
+<br>
+
+**Notice: If your docker volume(s) are mount by `vmhgfs-fuse`, please using "``-o subtype=vmhgfs-fuse,allow_other``" argument like "``vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other``" to mount them to make smbd could access them.**
 
 
 ## Get Files
