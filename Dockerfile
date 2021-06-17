@@ -31,8 +31,6 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && mkdir -p /etc/samba \
   && mkdir -p /opt/file_server_config \
   && mkdir -p /usr/local/bin/file_server \
-  && mkdir -p /usr/local/bin/file_server/xrit-rx \
-  && mkdir -p /usr/local/bin/file_server/himawari-rx \
   && mkdir -p /var/run \
   && mkdir -p /var/run/vsftpd \
   && mkdir -p /var/run/vsftpd/empty \
